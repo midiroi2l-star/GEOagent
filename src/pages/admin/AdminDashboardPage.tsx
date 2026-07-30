@@ -4,6 +4,7 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContaine
 import { adminApi, type AdminStats, type SubmissionListItem } from "../../lib/adminApi";
 import { PERSONA_MAP, PERSONAS } from "../../data/personas";
 import { STRENGTH_MAP } from "../../data/strengths";
+import { SHAPE_LABEL } from "../../data/profileShape";
 
 export function AdminDashboardPage() {
   const navigate = useNavigate();
@@ -167,7 +168,7 @@ export function AdminDashboardPage() {
                     <td className="py-2 pr-3 text-slate-500">
                       {row.topStrength ? STRENGTH_MAP[row.topStrength as keyof typeof STRENGTH_MAP]?.nameKo : "-"}
                     </td>
-                    <td className="py-2 pr-3 text-slate-500">{row.profileShape}</td>
+                    <td className="py-2 pr-3 text-slate-500">{SHAPE_LABEL[row.profileShape] ?? row.profileShape}</td>
                     <td className="py-2 pr-3 text-slate-400">{new Date(row.createdAt).toLocaleString("ko-KR")}</td>
                     <td className="py-2 pr-3">
                       <Link to={`/admin/submissions/${row.id}`} className="font-semibold text-brand-indigo hover:underline">
