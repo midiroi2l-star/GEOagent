@@ -1,0 +1,20 @@
+name = "strength-compass"
+pages_build_output_dir = "dist"
+compatibility_date = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
+
+# Cloudflare D1 database binding used by the /functions/api/* backend.
+# 1. Create the database once:  wrangler d1 create strength-compass-db
+# 2. Paste the returned database_id below.
+# 3. Apply the schema:          wrangler d1 migrations apply strength-compass-db --remote
+[[d1_databases]]
+binding = "DB"
+database_name = "strength-compass-db"
+database_id = "REPLACE_WITH_YOUR_D1_DATABASE_ID"
+migrations_dir = "migrations"
+
+# Set these as Pages project secrets (dashboard: Settings → Environment variables → Encrypt)
+# rather than in this file:
+#   ADMIN_USERNAME          (defaults to "admin" if unset)
+#   ADMIN_PASSWORD          (defaults to "admin1004" if unset)
+#   ADMIN_SESSION_SECRET    (random long string; required for production)
