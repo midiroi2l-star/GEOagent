@@ -1,0 +1,15 @@
+{
+  "name": "geoagent-schedule",
+  "private": true,
+  "version": "1.0.0",
+  "description": "동호회 월간 일정표 웹앱 (Cloudflare Pages + Functions + D1 + R2)",
+  "scripts": {
+    "dev": "wrangler pages dev public",
+    "deploy": "wrangler pages deploy public",
+    "db:migrate:local": "wrangler d1 execute geoagent-schedule-db --local --file=schema.sql",
+    "db:migrate:remote": "wrangler d1 execute geoagent-schedule-db --remote --file=schema.sql"
+  },
+  "devDependencies": {
+    "wrangler": "^3.90.0"
+  }
+}

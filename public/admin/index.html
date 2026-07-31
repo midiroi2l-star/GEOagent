@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<title>일정 관리</title>
+<link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+<div class="page">
+  <section id="login-section" class="login-section">
+    <form id="login-form" class="login-form">
+      <h1>관리자 로그인</h1>
+      <label>아이디
+        <input type="text" name="username" autocomplete="username" required />
+      </label>
+      <label>비밀번호
+        <input type="password" name="password" autocomplete="current-password" required />
+      </label>
+      <p id="login-error" class="form-error"></p>
+      <button type="submit" class="btn btn-primary">로그인</button>
+    </form>
+  </section>
+
+  <section id="calendar-section" class="calendar-section" hidden>
+    <header class="top-header">
+      <h1>일정 관리</h1>
+      <button id="logout-btn" class="btn" type="button">로그아웃</button>
+    </header>
+
+    <nav class="month-nav">
+      <button id="prev-btn" class="nav-btn" type="button">‹ 이전 달</button>
+      <span id="month-label" class="month-label"></span>
+      <button id="next-btn" class="nav-btn" type="button">다음 달 ›</button>
+    </nav>
+
+    <main id="calendar" class="calendar"></main>
+  </section>
+</div>
+
+<div id="event-modal" class="modal">
+  <div class="modal-dialog">
+    <button id="cancel-btn" class="modal-close" type="button" aria-label="닫기">×</button>
+    <h2 id="event-modal-title"></h2>
+    <form id="event-form" class="event-form">
+      <label>날짜
+        <input type="date" name="event_date" required />
+      </label>
+      <div class="time-row">
+        <label>시작 시간
+          <input type="time" name="start_time" required />
+        </label>
+        <label>종료 시간
+          <input type="time" name="end_time" required />
+        </label>
+      </div>
+      <label>강사
+        <input type="text" name="instructor" maxlength="50" required />
+      </label>
+      <label>제목
+        <input type="text" name="title" maxlength="100" required />
+      </label>
+      <label>내용 (선택)
+        <textarea name="content" rows="5" placeholder="상세 프로그램 내용을 입력하세요"></textarea>
+      </label>
+
+      <div id="existing-image-wrap" class="existing-image" hidden>
+        <img id="existing-image-img" alt="첨부 이미지" />
+        <label class="checkbox-label">
+          <input type="checkbox" id="remove-image" /> 기존 이미지 삭제
+        </label>
+      </div>
+
+      <label>이미지 (선택)
+        <input type="file" name="image" accept="image/png,image/jpeg,image/gif,image/webp" />
+      </label>
+
+      <p id="form-error" class="form-error"></p>
+
+      <div class="form-actions">
+        <button id="delete-btn" class="btn btn-danger" type="button" hidden>삭제</button>
+        <button type="submit" class="btn btn-primary">저장</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script type="module" src="/js/admin.js"></script>
+</body>
+</html>

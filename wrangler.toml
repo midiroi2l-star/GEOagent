@@ -1,0 +1,20 @@
+name = "geoagent-schedule"
+compatibility_date = "2024-11-01"
+pages_build_output_dir = "public"
+
+# 아래 값들은 Cloudflare 리소스를 생성한 뒤 실제 값으로 채워주세요.
+# wrangler d1 create geoagent-schedule-db
+[[d1_databases]]
+binding = "DB"
+database_name = "geoagent-schedule-db"
+database_id = "REPLACE_WITH_YOUR_D1_DATABASE_ID"
+
+# wrangler r2 bucket create geoagent-schedule-images
+[[r2_buckets]]
+binding = "IMAGES"
+bucket_name = "geoagent-schedule-images"
+
+[vars]
+# 기본 관리자 아이디입니다. 비밀번호(ADMIN_PASSWORD)와 SESSION_SECRET은
+# 반드시 시크릿으로 별도 등록하세요 (README 참고). 여기에 평문으로 적지 마세요.
+ADMIN_USERNAME = "ffadmin"

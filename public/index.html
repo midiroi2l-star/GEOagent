@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>동호회 일정표</title>
+<link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+<div class="page">
+  <header class="top-header">
+    <h1>동호회 일정표</h1>
+  </header>
+
+  <nav class="month-nav">
+    <button id="prev-btn" class="nav-btn" type="button">‹ 이전 달</button>
+    <span id="month-label" class="month-label"></span>
+    <button id="next-btn" class="nav-btn" type="button">다음 달 ›</button>
+  </nav>
+
+  <main id="calendar" class="calendar">
+    <p class="loading">불러오는 중...</p>
+  </main>
+</div>
+
+<div id="event-modal" class="modal">
+  <div class="modal-dialog">
+    <button id="modal-close" class="modal-close" type="button" aria-label="닫기">×</button>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
+<script type="module" src="/js/main.js"></script>
+</body>
+</html>
