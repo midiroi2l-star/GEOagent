@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#2f5d50">
+<title>전도서 31일 묵상</title>
+<style>
+:root{--bg:#f6f3ec;--card:#fff;--ink:#23302b;--sub:#6b766f;--line:#e4dfd3;--main:#2f5d50;--main2:#dcebe4;--gold:#c08a2e;--done:#2f5d50;--today:#c08a2e}
+@media(prefers-color-scheme:dark){:root{--bg:#141a17;--card:#1e2723;--ink:#e8efe9;--sub:#95a39b;--line:#2d3832;--main:#6fb59e;--main2:#23362f;--gold:#e0b15a;--done:#6fb59e;--today:#e0b15a}}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 -apple-system,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;padding-bottom:calc(72px + env(safe-area-inset-bottom))}
+header{padding:18px 16px 6px;max-width:640px;margin:0 auto}
+header h1{margin:0;font-size:20px}
+header p{margin:2px 0 0;color:var(--sub);font-size:13px}
+main{max-width:640px;margin:0 auto;padding:8px 16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin:12px 0}
+.card h2{margin:0 0 6px;font-size:13px;color:var(--main);letter-spacing:.02em}
+.card p{margin:0}
+.ref{font-size:13px;color:var(--gold);font-weight:700}
+.title{font-size:20px;font-weight:700;margin:2px 0 8px;line-height:1.4}
+nav.tabs{position:fixed;bottom:0;left:0;right:0;background:var(--card);border-top:1px solid var(--line);display:flex;padding-bottom:env(safe-area-inset-bottom);z-index:5}
+nav.tabs button{flex:1;border:0;background:none;padding:12px 0;font:inherit;font-size:13px;color:var(--sub);cursor:pointer}
+nav.tabs button.on{color:var(--main);font-weight:700}
+.btn{display:inline-block;border:1px solid var(--main);color:var(--main);background:none;border-radius:999px;padding:8px 14px;font:inherit;font-size:14px;text-decoration:none;cursor:pointer}
+.btn.fill{background:var(--main);color:#fff}
+@media(prefers-color-scheme:dark){.btn.fill{color:#10201a}}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.media{display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px dashed var(--line)}
+.media:first-of-type{border-top:0}
+.media b{display:block}
+.media small{color:var(--sub)}
+.media .btn{margin-left:auto;white-space:nowrap}
+.daynav{display:flex;align-items:center;justify-content:space-between;margin:8px 0}
+.daynav button{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;padding:6px 12px;font:inherit;cursor:pointer}
+.daynav span{font-weight:700}
+.bar{height:10px;background:var(--main2);border-radius:999px;overflow:hidden}
+.bar>i{display:block;height:100%;background:var(--main);border-radius:999px}
+.grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}
+.cell{aspect-ratio:1;border:1px solid var(--line);border-radius:12px;background:var(--card);color:var(--ink);font:inherit;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;position:relative;padding:0}
+.cell small{font-size:9px;color:var(--sub)}
+.cell.done{background:var(--done);color:#fff;border-color:var(--done)}
+.cell.done small{color:#ffffffcc}
+@media(prefers-color-scheme:dark){.cell.done{color:#10201a}.cell.done small{color:#10201acc}}
+.cell.today{outline:2px solid var(--today);outline-offset:1px}
+.cell.future{opacity:.55}
+.cell.empty{visibility:hidden}
+.week{display:flex;flex-direction:column;gap:8px}
+.wk{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;cursor:pointer;text-align:left;font:inherit;color:inherit;width:100%}
+.wk .n{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;border:2px solid var(--line);font-weight:700;flex:none}
+.wk.done .n{background:var(--done);border-color:var(--done);color:#fff}
+.wk.today{border-color:var(--today)}
+.wk small{color:var(--sub);display:block}
+.dow{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;text-align:center;font-size:12px;color:var(--sub);margin-bottom:4px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center}
+.stats b{display:block;font-size:22px;color:var(--main)}
+.stats small{color:var(--sub)}
+.ch{display:flex;align-items:center;gap:10px;margin:8px 0;font-size:14px}
+.ch span:first-child{width:34px;color:var(--sub)}
+.ch .bar{flex:1}
+.ch span:last-child{width:38px;text-align:right;color:var(--sub);font-size:12px}
+label.set{display:block;font-size:13px;color:var(--sub)}
+input[type=date]{font:inherit;padding:8px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink)}
+.done-btn{width:100%;padding:14px;border-radius:14px;border:0;background:var(--main);color:#fff;font:inherit;font-weight:700;font-size:16px;cursor:pointer;margin-top:4px}
+@media(prefers-color-scheme:dark){.done-btn{color:#10201a}}
+.done-btn.on{background:var(--main2);color:var(--main)}
+.note{font-size:12px;color:var(--sub);margin:10px 2px}
+.prayer{font-style:italic}
+</style>
+</head>
+<body>
+<header><h1>📖 전도서 31일 묵상</h1><p id="sub"></p></header>
+<main id="app"></main>
+<nav class="tabs" id="tabs"></nav>
+<script src="data.js"></script>
+<script>
+const KEY='qoheleth31';
+const TABS=[['today','오늘'],['week','주간'],['month','월간'],['all','진행']];
+const DAY=86400000;
+let st={start:null,done:{},sel:null,tab:'today',weekIdx:null};
+try{Object.assign(st,JSON.parse(localStorage.getItem(KEY)||'{}'))}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify({start:st.start,done:st.done}))}catch(e){}};
+const ymd=d=>{const z=new Date(d);return z.getFullYear()+'-'+String(z.getMonth()+1).padStart(2,'0')+'-'+String(z.getDate()).padStart(2,'0')};
+const parse=s=>{const[a,b,c]=s.split('-').map(Number);return new Date(a,b-1,c)};
+if(!st.start){st.start=ymd(new Date());save()}
+const dayDate=n=>new Date(parse(st.start).getTime()+(n-1)*DAY+ (0));
+const todayIdx=()=>{const t=parse(ymd(new Date())),s=parse(st.start);return Math.round((t-s)/DAY)+1};
+const curDay=()=>Math.min(31,Math.max(1,todayIdx()));
+const doneCount=()=>Object.keys(st.done).filter(k=>st.done[k]).length;
+const D=n=>window.DAYS[n-1];
+const yt=q=>'https://www.youtube.com/results?search_query='+encodeURIComponent(q)+'&sp=CAM%253D';
+const bible=ref=>'https://www.bible.com/ko/search/bible?q='+encodeURIComponent('전도서 '+ref);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const md=d=>{const x=d;return (x.getMonth()+1)+'/'+x.getDate()};
+const dw='일월화수목금토';
+
+function streak(){let s=0;for(let n=Math.min(31,Math.max(todayIdx(),1));n>=1;n--){if(st.done[n])s++;else if(n===todayIdx())continue;else break}return s}
+
+function go(tab,sel){st.tab=tab;if(sel)st.sel=sel;render();scrollTo(0,0)}
+function toggle(n){st.done[n]=!st.done[n];if(!st.done[n])delete st.done[n];save();render()}
+
+function viewToday(){
+  const n=st.sel||curDay(),d=D(n),dt=dayDate(n);
+  const late=todayIdx()<1?'아직 시작 전입니다 ('+md(parse(st.start))+' 시작)':'';
+  return `
+  <div class="daynav"><button onclick="st.sel=${Math.max(1,n-1)};render()" ${n<=1?'disabled':''}>◀</button>
+  <span>${n}일차 · ${md(dt)} (${dw[dt.getDay()]})${n===todayIdx()?' · 오늘':''}</span>
+  <button onclick="st.sel=${Math.min(31,n+1)};render()" ${n>=31?'disabled':''}>▶</button></div>
+  ${late?`<p class="note">${late}</p>`:''}
+  <div class="card"><div class="ref">전도서 ${d.ref}</div><div class="title">${esc(d.title)}</div>
+    <p>${esc(d.summary)}</p>
+    <div class="row"><a class="btn fill" target="_blank" rel="noopener" href="${bible(d.ref)}">쉬운성경 본문 읽기</a></div>
+    <p class="note">쉬운성경 본문은 저작권 보호 대상이라 앱에 싣지 않았습니다. 버튼으로 성경 앱·사이트에서 '쉬운성경'을 선택해 읽어 주세요.</p></div>
+  <div class="card"><h2>🎵 오늘의 찬양</h2>
+    <div class="media"><div><small>찬송가</small><b>${esc(d.hymn.t)}</b></div><a class="btn" target="_blank" rel="noopener" href="${yt('찬송가 '+d.hymn.t)}">▶ 유튜브</a></div>
+    <div class="media"><div><small>CCM</small><b>${esc(d.ccm.t)}</b></div><a class="btn" target="_blank" rel="noopener" href="${yt('CCM '+d.ccm.t)}">▶ 유튜브</a></div>
+    <p class="note">유튜브 검색 결과를 조회수순으로 정렬해 열립니다. 맨 위 영상이 조회수가 가장 많은 영상입니다.</p></div>
+  <div class="card"><h2>📜 본문 해석</h2><p>${esc(d.interp)}</p></div>
+  <div class="card"><h2>🌱 오늘의 적용</h2><p>${esc(d.apply)}</p></div>
+  <div class="card"><h2>🙏 오늘의 기도</h2><p class="prayer">${esc(d.prayer)}</p></div>
+  <button class="done-btn ${st.done[n]?'on':''}" onclick="toggle(${n})">${st.done[n]?'✓ 묵상 완료 (취소하려면 누르세요)':'오늘 묵상 완료'}</button>`;
+}
+
+function cellHtml(n){
+  const t=todayIdx(),dt=dayDate(n);
+  const cls=['cell',st.done[n]?'done':'',n===t?'today':'',n>t?'future':''].join(' ');
+  return `<button class="${cls}" onclick="go('today',${n})"><b>${n}</b><small>${md(dt)}</small></button>`;
+}
+
+function viewWeek(){
+  const weeks=5,t=todayIdx();
+  let w=st.weekIdx??Math.min(weeks,Math.max(1,Math.ceil(curDay()/7)));
+  const a=(w-1)*7+1,b=Math.min(31,a+6);
+  let rows='';
+  for(let n=a;n<=b;n++){
+    const d=D(n),dt=dayDate(n);
+    rows+=`<button class="wk ${st.done[n]?'done':''} ${n===t?'today':''}" onclick="go('today',${n})"><span class="n">${st.done[n]?'✓':n}</span><span><b>${md(dt)} (${dw[dt.getDay()]}) · ${esc(d.title)}</b><small>전도서 ${d.ref}</small></span></button>`;
+  }
+  const c=[...Array(b-a+1)].filter((_,i)=>st.done[a+i]).length;
+  return `<div class="daynav"><button onclick="st.weekIdx=${Math.max(1,w-1)};render()" ${w<=1?'disabled':''}>◀</button><span>${w}주차 (${a}~${b}일차)</span><button onclick="st.weekIdx=${Math.min(weeks,w+1)};render()" ${w>=weeks?'disabled':''}>▶</button></div>
+  <div class="card"><h2>이번 주 진행 ${c}/${b-a+1}</h2><div class="bar"><i style="width:${c/(b-a+1)*100}%"></i></div></div>
+  <div class="week">${rows}</div>`;
+}
+
+function viewMonth(){
+  const s=parse(st.start),first=s.getDay();
+  let cells='';for(let i=0;i<first;i++)cells+='<div class="cell empty"></div>';
+  for(let n=1;n<=31;n++)cells+=cellHtml(n);
+  return `<div class="card"><h2>${s.getFullYear()}년 ${s.getMonth()+1}월 ${s.getDate()}일 시작 · 31일 달력</h2>
+  <div class="dow">${[...dw].map(x=>`<span>${x}</span>`).join('')}</div>
+  <div class="grid">${cells}</div>
+  <p class="note">날짜를 누르면 그날의 묵상으로 이동합니다. 금색 테두리가 오늘, 채워진 칸은 완료한 날입니다.</p></div>`;
+}
+
+function viewAll(){
+  const c=doneCount(),pct=Math.round(c/31*100);
+  const chs=[...Array(12)].map((_,i)=>{const ch=i+1,days=window.DAYS.map((d,j)=>d.ch.includes(ch)?j+1:0).filter(Boolean),dn=days.filter(n=>st.done[n]).length;return `<div class="ch"><span>${ch}장</span><div class="bar"><i style="width:${days.length?dn/days.length*100:0}%"></i></div><span>${dn}/${days.length}</span></div>`}).join('');
+  return `<div class="card"><h2>전체 진행상황</h2><div class="title" style="margin:0 0 8px">${c} / 31일 · ${pct}%</div><div class="bar"><i style="width:${pct}%"></i></div>
+  <div class="stats" style="margin-top:14px"><div><b>${c}</b><small>완료</small></div><div><b>${31-c}</b><small>남은 날</small></div><div><b>${streak()}</b><small>연속</small></div></div>
+  ${c===31?'<p style="margin-top:12px;text-align:center">🎉 31일 묵상을 모두 마쳤습니다!</p>':''}</div>
+  <div class="card"><h2>장별 진행</h2>${chs}<p class="note">한 날이 두 장에 걸치면 양쪽에 함께 집계됩니다.</p></div>
+  <div class="card"><h2>설정</h2><label class="set">1일차 시작 날짜<br><input type="date" value="${st.start}" onchange="if(this.value){st.start=this.value;st.sel=null;st.weekIdx=null;save();render()}"></label>
+  <div class="row"><button class="btn" onclick="if(confirm('모든 완료 기록을 지울까요?')){st.done={};save();render()}">기록 초기화</button></div></div>`;
+}
+
+function render(){
+  const v={today:viewToday,week:viewWeek,month:viewMonth,all:viewAll}[st.tab]();
+  document.getElementById('app').innerHTML=v;
+  document.getElementById('tabs').innerHTML=TABS.map(([k,l])=>`<button class="${st.tab===k?'on':''}" onclick="st.tab='${k}';if('${k}'==='today')st.sel=null;if('${k}'==='week')st.weekIdx=null;render();scrollTo(0,0)">${l}</button>`).join('');
+  document.getElementById('sub').textContent='쉬운성경 · 하루 한 본문 · '+doneCount()+'/31일 완료';
+}
+render();
+</script>
+</body>
+</html>
