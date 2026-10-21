@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  --font-serif: "Noto Serif KR", "Nanum Myeongjo", serif;
+  --color-paper: #f7f4ee;
+  --color-ink: #1f2a26;
+  --color-moss-50: #eef4f1;
+  --color-moss-100: #d7e6df;
+  --color-moss-500: #3f7a69;
+  --color-moss-600: #2f5d50;
+  --color-moss-700: #244a40;
+  --color-moss-800: #1d3d34;
+  --color-gold: #b8893b;
+  --color-gold-soft: #f1e6cf;
+  --color-night: #121614;
+  --color-night-card: #1b211e;
+  --color-night-line: #2b3430;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background: var(--color-paper);
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.dark body {
+  background: var(--color-night);
+  color: #e3e8e5;
+}
+
+::selection {
+  background: rgba(184, 137, 59, 0.3);
+}
+
+.scrollbar-none {
+  scrollbar-width: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.06);
+  border-radius: 0.5rem;
+}
+.dark .skeleton {
+  background: rgba(255, 255, 255, 0.06);
+}
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  animation: shimmer 1.4s infinite;
+}
+
+@media print {
+  header, nav, .no-print {
+    display: none !important;
+  }
+  body {
+    background: white;
+  }
+}

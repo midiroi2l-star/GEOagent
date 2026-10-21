@@ -3,6 +3,7 @@ name: Deploy to Cloudflare Pages
 on:
   push:
     branches: [main]
+    paths-ignore: ['devotional/**', '.github/workflows/deploy-devotional.yml', '.github/workflows/devotional-prefetch.yml']
   workflow_dispatch: {}
 
 jobs:

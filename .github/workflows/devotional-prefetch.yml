@@ -1,0 +1,34 @@
+name: Daily Devotional — pre-generate
+
+# 매일 00:10(KST)에 오늘부터 7일치 묵상을 미리 생성해, 사용자가 기다리지 않고 바로 읽을 수 있게 합니다.
+# 필요한 저장소 Secrets: DEVOTIONAL_URL (예: https://daily-devotional.pages.dev), DEVOTIONAL_ADMIN_TOKEN (= Pages의 ADMIN_TOKEN)
+on:
+  schedule:
+    - cron: '10 15 * * *'
+  workflow_dispatch:
+    inputs:
+      days:
+        description: '오늘부터 며칠치를 생성할지'
+        default: '7'
+
+jobs:
+  prefetch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate upcoming devotionals
+        env:
+          URL: ${{ secrets.DEVOTIONAL_URL }}
+          TOKEN: ${{ secrets.DEVOTIONAL_ADMIN_TOKEN }}
+          DAYS: ${{ inputs.days || '7' }}
+        run: |
+          if [ -z "$URL" ] || [ -z "$TOKEN" ]; then echo "DEVOTIONAL_URL / DEVOTIONAL_ADMIN_TOKEN secrets are not set — skipping"; exit 0; fi
+          failed=0
+          for i in $(seq 0 $((DAYS - 1))); do
+            d=$(TZ=Asia/Seoul date -d "+$i day" +%F)
+            echo "::group::$d"
+            code=$(curl -sS -o out.json -w '%{http_code}' --max-time 300 -X POST -H "Authorization: Bearer $TOKEN" "$URL/api/admin/generate?date=$d" || echo 000)
+            cat out.json 2>/dev/null; echo; echo "HTTP $code"
+            echo "::endgroup::"
+            [ "$code" = "200" ] || [ "$code" = "202" ] || failed=1
+          done
+          exit $failed

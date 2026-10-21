@@ -1,0 +1,27 @@
+name = "daily-devotional"
+pages_build_output_dir = "dist"
+compatibility_date = "2025-09-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Cloudflare D1 — 묵상 콘텐츠 캐시 / 조회수 / 아멘 수
+# 1. 생성:      npx wrangler d1 create daily-devotional-db
+# 2. 출력된 database_id를 아래에 붙여넣기
+# 3. 스키마 적용: npm run db:migrate:remote
+[[d1_databases]]
+binding = "DB"
+database_name = "daily-devotional-db"
+database_id = "REPLACE_WITH_YOUR_D1_DATABASE_ID"
+migrations_dir = "migrations"
+
+[vars]
+# 오늘 기준 며칠 뒤까지 일반 사용자 요청으로 생성할 수 있는지(미리보기 범위)
+MAX_FUTURE_DAYS = "14"
+# 일반 사용자 요청으로 생성 가능한 가장 이른 날짜
+MIN_DATE = "2020-01-01"
+
+# 아래 값은 비밀(Secret)로 등록하세요 — 대시보드 Settings → Variables and Secrets 또는
+#   npx wrangler pages secret put ANTHROPIC_API_KEY --project-name=daily-devotional
+#   ANTHROPIC_API_KEY   (필수) 강해·적용·기도·찬양 추천 생성
+#   YOUTUBE_API_KEY     (권장) 조회수 가장 많은 YouTube 영상 찾기. 없으면 조회수순 검색 링크로 대체
+#   ADMIN_TOKEN         (권장) /api/admin/generate 호출용(미리 생성·재생성)
+#   CLAUDE_MODEL        (선택) 기본값 claude-opus-5-5
