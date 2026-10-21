@@ -2,6 +2,8 @@
 
 강점 발견 워크숍용 웹앱입니다. 참가자는 상황(암웨이 사업자·직장인·자영업자·주부·취준생·학생)을 선택하고 이름을 입력한 뒤 48문항 설문에 응답하면, VIA 성격강점 분류체계 기반 24개 강점 · 6개 핵심덕목 레이더 차트, 대표강점 TOP5 분석, 성장 영역, GROW 모델 기반 90일 액션플랜이 담긴 A4 PDF 컨설팅 리포트를 받습니다. 코치를 위한 별도의 상세 코칭 매뉴얼(PDF)도 제공하며, 관리자 페이지에서는 전체 참여 현황과 개인별 결과를 조회할 수 있습니다.
 
+> 같은 저장소의 [`devotional/`](devotional/README.md)에는 별도 앱 **📖 매일 묵상(Daily Devotional)** 이 있습니다(Cloudflare Pages + D1, 독립 배포).
+
 ## 스택
 
 - **프론트엔드**: React 19 + TypeScript + Vite + Tailwind CSS v4 + React Router + Recharts(레이더/막대 차트) + jsPDF/html2canvas(PDF 생성)
